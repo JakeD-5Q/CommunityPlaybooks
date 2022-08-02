@@ -1,0 +1,66 @@
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+|   	    	Enrich 		      |
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+Enrich-Sentinel-Incident-AlienVault-OTX	
+Get-AlertEntitiesEnrichment	
+Get-AlienVault_OTX	
+Get-MDEFileActivityWithin30Mins	
+Get-MDEProcessActivityWithin30Mins	
+
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+|	        	Health      		|
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+Send-AnalyticalRulesHealthNotifications	
+Send-ConnectorHealthStatus	
+
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+|	      	Investigate   		|
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+Get-MDEInvestigationPackage	
+Run-MDEAntivirus	
+Start-MDEAutomatedInvestigation	
+
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+|		      Remediate 	    	|
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+Isolate-MDEMachine	
+Remove-MDEAppExecution	
+Unisolate-MDEMachine	
+
+
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+|		        Reports     		|
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+M365-Security-Posture	
+Send-IngestionCostAlert	
+Send-IngestionCostAnomalyAlert	
+
+
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+|		      Restrict  	    	|
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+Restrict-MDEAppExecution	
+Restrict-MDEDomain	
+Restrict-MDEFileHash	
+Restrict-MDEIPAddress	
+Restrict-MDEUrl	
+
+
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+|		     Risky User   	  	|
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+Block-AADUser	
+Reset-AADUserPassword	
+Block-AADUserOrAdmin	
+Block-OnPremADUser	
+Confirm-AADRiskyUser
+Dismiss-AADRiskyUser
+Revoke-AADSignInSessions	
+
+
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+|		      Watchlist     		|
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+Watchlist-Add-IPToWatchList	
+Watchlist-Add-URLToWatchList	
+Watchlist-CloseIncidentKnownIPs	
