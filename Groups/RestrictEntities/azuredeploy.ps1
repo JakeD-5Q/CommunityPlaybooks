@@ -20,7 +20,7 @@ $today = Get-Date -Format "MM-dd-yyyy"
 $suffix = Get-Random -Maximum 100
 $deploySuffix = $today + "_$suffix"
 
-function Concat-PbName(){
+function New-PbName(){
     param(
         [Parameter(Mandatory = $true)]$PlaybookName,
         [Parameter(Mandatory = $true)]$Prefix
@@ -41,13 +41,12 @@ New-AzResourceGroupDeployment -Name $deploymentName `
     -TemplateParameterFile $localTemplate `
     -Verbose
 
-Restrict-MDEAppExecution.permissions.ps1
+$NewName = New-PbName($Name, $Prefix)
+Restrict-MDEAppExecution.permissions.ps1 -PlaybookName $NewName
 
 
 $Name = "Restrict-MDEDomain"
 $deploymentName = $Name + $deploySuffix
-
-$deploymentName = "Restrict-MDEDomain" + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/Restrict-MDEDomain/alert-trigger/azuredeploy.json"
 $localTemplate = 'Restrict-MDEDomain.parameters.json'
 New-AzResourceGroupDeployment -Name $deploymentName `
@@ -56,15 +55,12 @@ New-AzResourceGroupDeployment -Name $deploymentName `
     -TemplateParameterFile $localTemplate `
     -Verbose
 
-Restrict-MDEDomain.permissions.ps1
-
+$NewName = New-PbName($Name, $Prefix)
+Restrict-MDEDomain.permissions.ps1 -PlaybookName $NewName
 
 
 $Name = "Restrict-MDEFileHash"
 $deploymentName = $Name + $deploySuffix
-
-
-$deploymentName = "Restrict-MDEFileHash" + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/Restrict-MDEFileHash/alert-trigger/azuredeploy.json"
 $localTemplate = 'Restrict-MDEFileHash.parameters.json'
 New-AzResourceGroupDeployment -Name $deploymentName `
@@ -73,13 +69,12 @@ New-AzResourceGroupDeployment -Name $deploymentName `
     -TemplateParameterFile $localTemplate `
     -Verbose
 
-Restrict-MDEFileHash.permissions.ps1
+$NewName = New-PbName($Name, $Prefix)
+Restrict-MDEFileHash.permissions.ps1 -PlaybookName $NewName
 
 
 $Name = "Restrict-MDEIPAddress"
 $deploymentName = $Name + $deploySuffix
-
-$deploymentName = "Restrict-MDEIPAddress" + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/Restrict-MDEIPAddress/alert-trigger/azuredeploy.json"
 $localTemplate = 'Restrict-MDEIPAddress.parameters.json'
 New-AzResourceGroupDeployment -Name $deploymentName `
@@ -88,13 +83,14 @@ New-AzResourceGroupDeployment -Name $deploymentName `
     -TemplateParameterFile $localTemplate `
     -Verbose
 
+$NewName = New-PbName($Name, $Prefix)
 Restrict-MDEIPAddress.permissions.ps1 `
+ -PlaybookName $NewName `
  -SubscriptionId $SubscriptionId `
  -ResourceGroup $ResourceGroup
 
 
 $Name = "Restrict-MDEUrl"
-
 $deploymentName = $Name + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/Restrict-MDEUrl/alert-trigger/azuredeploy.json"
 $localTemplate = 'Restrict-MDEUrl.parameters.json'
@@ -104,6 +100,7 @@ New-AzResourceGroupDeployment -Name $deploymentName `
     -TemplateParameterFile $localTemplate `
     -Verbose
 
-Restrict-MDEUrl.permissions.ps1
+$NewName = New-PbName($Name, $Prefix)
+Restrict-MDEUrl.permissions.ps1 -PlaybookName $NewName
 
 
