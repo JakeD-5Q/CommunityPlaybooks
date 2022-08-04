@@ -1,11 +1,34 @@
 param(
     [Parameter(Mandatory = $true)]$ResourceGroup,
-    [Parameter(Mandatory = $true)]$SubscriptionId
+    [Parameter(Mandatory = $true)]$SubscriptionId,
+    [Parameter(Mandatory = $true)]$Prefix
 )
+
+Get-AzResourceGroup -Name $ResourceGroup -ErrorVariable notPresent -ErrorAction SilentlyContinue
+
+if ($notPresent) {
+    Write-Host "This resource group does not exist. To create new resource group"
+    
+    $Location = Read-Host "Enter the location:"
+    
+    New-AzResourceGroup -Name $ResourceGroup `
+        -Location $Location `
+        -Verbose
+}
 
 $today = Get-Date -Format "MM-dd-yyyy"
 $suffix = Get-Random -Maximum 100
 $deploySuffix = $today + "_$suffix"
+
+function Concat-PbName(){
+    param(
+        [Parameter(Mandatory = $true)]$PlaybookName,
+        [Parameter(Mandatory = $true)]$Prefix
+    )
+
+    $NewName = $Prefix + "$.$PlaybookName"
+    return $NewName
+}
 
 
 $deploymentName = "Restrict-MDEAppExecution" + $deploySuffix
@@ -44,7 +67,7 @@ Restrict-MDEFileHash.permissions.ps1
 
 
 $deploymentName = "Restrict-MDEIPAddress" + $deploySuffix
-$remoteUrl = ""
+$remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/Restrict-MDEIPAddress/alert-trigger/azuredeploy.json"
 $localTemplate = 'Restrict-MDEIPAddress.parameters.json'
 New-AzResourceGroupDeployment -Name $deploymentName `
     -ResourceGroupName $ResourceGroup `
@@ -57,7 +80,7 @@ Restrict-MDEIPAddress.permissions.ps1 `
  -ResourceGroup $ResourceGroup
 
 $deploymentName = "Restrict-MDEUrl" + $deploySuffix
-$remoteUrl = ""
+$remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/Restrict-MDEUrl/alert-trigger/azuredeploy.json"
 $localTemplate = 'Restrict-MDEUrl.parameters.json'
 New-AzResourceGroupDeployment -Name $deploymentName `
     -ResourceGroupName $ResourceGroup `
