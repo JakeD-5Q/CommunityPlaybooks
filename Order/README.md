@@ -8,8 +8,9 @@ Playbooks should be deployed in the following order so that the following featur
 
 - notify analyts of new incidents
 - enrich incidents and events
+- quick machine investigations
 - restrict malicious entities
-- quick account resets and revokes
+- quick user actions
 - remediate infected machines
 - automatic (health) reports
 
@@ -17,6 +18,7 @@ Playbooks should be deployed in the following order so that the following featur
 ### Deployment Order
 
 - [ ] Deploy [Custom Playbooks](https://github.com/JakeD-5Q/CustomPlaybooks)
-  -[x] notify analyts of new incidents
-  -[x] enrich incidents and events
-  
+  - [x] notify analyts of new incidents
+  - [x] enrich incidents and events
+  - [x] quick machine investigations
+- [ ] f
