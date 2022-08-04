@@ -31,7 +31,8 @@ function Concat-PbName(){
 }
 
 
-$deploymentName = "Restrict-MDEAppExecution" + $deploySuffix
+$Name = "Restrict-MDEAppExecution"
+$deploymentName = $Name  + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/Restrict-MDEAppExecution/alert-trigger/azuredeploy.json"
 $localTemplate = 'Restrict-MDEAppExecution.parameters.json'
 New-AzResourceGroupDeployment -Name $deploymentName `
@@ -42,6 +43,9 @@ New-AzResourceGroupDeployment -Name $deploymentName `
 
 Restrict-MDEAppExecution.permissions.ps1
 
+
+$Name = "Restrict-MDEDomain"
+$deploymentName = $Name + $deploySuffix
 
 $deploymentName = "Restrict-MDEDomain" + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/Restrict-MDEDomain/alert-trigger/azuredeploy.json"
@@ -54,6 +58,12 @@ New-AzResourceGroupDeployment -Name $deploymentName `
 
 Restrict-MDEDomain.permissions.ps1
 
+
+
+$Name = "Restrict-MDEFileHash"
+$deploymentName = $Name + $deploySuffix
+
+
 $deploymentName = "Restrict-MDEFileHash" + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/Restrict-MDEFileHash/alert-trigger/azuredeploy.json"
 $localTemplate = 'Restrict-MDEFileHash.parameters.json'
@@ -65,6 +75,9 @@ New-AzResourceGroupDeployment -Name $deploymentName `
 
 Restrict-MDEFileHash.permissions.ps1
 
+
+$Name = "Restrict-MDEIPAddress"
+$deploymentName = $Name + $deploySuffix
 
 $deploymentName = "Restrict-MDEIPAddress" + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/Restrict-MDEIPAddress/alert-trigger/azuredeploy.json"
@@ -79,7 +92,10 @@ Restrict-MDEIPAddress.permissions.ps1 `
  -SubscriptionId $SubscriptionId `
  -ResourceGroup $ResourceGroup
 
-$deploymentName = "Restrict-MDEUrl" + $deploySuffix
+
+$Name = "Restrict-MDEUrl"
+
+$deploymentName = $Name + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/Restrict-MDEUrl/alert-trigger/azuredeploy.json"
 $localTemplate = 'Restrict-MDEUrl.parameters.json'
 New-AzResourceGroupDeployment -Name $deploymentName `
