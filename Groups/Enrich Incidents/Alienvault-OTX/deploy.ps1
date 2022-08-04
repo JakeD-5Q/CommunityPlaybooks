@@ -18,8 +18,6 @@ if ($notPresent) {
 
 $PlaybookName = "AlienVault-OTX"
 
-# build playbook name
-$DeployedName = $NamePrefix + ".$PlaybookName"
 
 # Deploy all of these playbooks without downloading or cloning this repository
 $today = Get-Date -Format "MM-dd-yyyy"
@@ -30,7 +28,7 @@ $deploySuffix = $today + "_$suffix"
 # finally deploy resources
 $deploymentName = $PlaybookName + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/JakeD-5Q/CommunityPlaybooks/main/Groups/Enrich%20Incidents/Alienvault-OTX/azuredeploy.json"
-$localTemplate = $PlaybookName + '.parameters.json'
+$localTemplate = 'alienvaultOTX.parameters.json'
 New-AzResourceGroupDeployment -Name $deploymentName `
     -ResourceGroupName $ResourceGroup `
     -TemplateUri $remoteUrl `

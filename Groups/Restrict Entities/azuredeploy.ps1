@@ -1,5 +1,6 @@
 param(
-    [Parameter(Mandatory = $true)]$ResourceGroup
+    [Parameter(Mandatory = $true)]$ResourceGroup,
+    [Parameter(Mandatory = $true)]$SubscriptionId
 )
 
 $today = Get-Date -Format "MM-dd-yyyy"
@@ -13,9 +14,10 @@ $localTemplate = 'Restrict-MDEAppExecution.parameters.json'
 New-AzResourceGroupDeployment -Name $deploymentName `
     -ResourceGroupName $ResourceGroup `
     -TemplateUri $remoteUrl `
-    -TemplateParameterFile $localTemplate
+    -TemplateParameterFile $localTemplate `
+    -Verbose
 
-.\Restrict-MDEAppExecution.permissions.ps1
+Restrict-MDEAppExecution.permissions.ps1
 
 
 $deploymentName = "Restrict-MDEDomain" + $deploySuffix
@@ -24,9 +26,10 @@ $localTemplate = 'Restrict-MDEDomain.parameters.json'
 New-AzResourceGroupDeployment -Name $deploymentName `
     -ResourceGroupName $ResourceGroup `
     -TemplateUri $remoteUrl `
-    -TemplateParameterFile $localTemplate
+    -TemplateParameterFile $localTemplate `
+    -Verbose
 
-.\Restrict-MDEDomain.permissions.ps1
+Restrict-MDEDomain.permissions.ps1
 
 $deploymentName = "Restrict-MDEFileHash" + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/Restrict-MDEFileHash/alert-trigger/azuredeploy.json"
@@ -34,9 +37,10 @@ $localTemplate = 'Restrict-MDEFileHash.parameters.json'
 New-AzResourceGroupDeployment -Name $deploymentName `
     -ResourceGroupName $ResourceGroup `
     -TemplateUri $remoteUrl `
-    -TemplateParameterFile $localTemplate
+    -TemplateParameterFile $localTemplate `
+    -Verbose
 
-.\Restrict-MDEFileHash.permissions.ps1
+Restrict-MDEFileHash.permissions.ps1
 
 
 $deploymentName = "Restrict-MDEIPAddress" + $deploySuffix
@@ -45,9 +49,12 @@ $localTemplate = 'Restrict-MDEIPAddress.parameters.json'
 New-AzResourceGroupDeployment -Name $deploymentName `
     -ResourceGroupName $ResourceGroup `
     -TemplateUri $remoteUrl `
-    -TemplateParameterFile $localTemplate
+    -TemplateParameterFile $localTemplate `
+    -Verbose
 
-.\Restrict-MDEIPAddress.permissions.ps1 -SubscriptionId $SubscriptionId -ResourceGroup $ResourceGroup
+Restrict-MDEIPAddress.permissions.ps1 `
+ -SubscriptionId $SubscriptionId `
+ -ResourceGroup $ResourceGroup
 
 $deploymentName = "Restrict-MDEUrl" + $deploySuffix
 $remoteUrl = ""
@@ -55,8 +62,9 @@ $localTemplate = 'Restrict-MDEUrl.parameters.json'
 New-AzResourceGroupDeployment -Name $deploymentName `
     -ResourceGroupName $ResourceGroup `
     -TemplateUri $remoteUrl `
-    -TemplateParameterFile $localTemplate
+    -TemplateParameterFile $localTemplate `
+    -Verbose
 
-.\Restrict-MDEUrl.permissions.ps1
+Restrict-MDEUrl.permissions.ps1
 
 

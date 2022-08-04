@@ -10,8 +10,8 @@ if ($notPresent) {
     $Location = Read-Host "Enter the location:"
     
     New-AzResourceGroup -Name $ResourceGroup `
-    -Location $Location `
-    -Verbose
+        -Location $Location `
+        -Verbose
 }
 
 
@@ -19,17 +19,7 @@ $today = Get-Date -Format "MM-dd-yyyy"
 $suffix = Get-Random -Maximum 100
 $deploySuffix = $today + "_$suffix"
 
-
-$deploymentName = "Get-AlienVault_OTX" + $deploySuffix
-$remoteUrl = "https://raw.githubusercontent.com/JakeD-5Q/CommunityPlaybooks/main/Groups/Enrich%20Incidents/Alienvault-OTX/azuredeploy.json"
-$localTemplate = 'alienvaultOTX.parameters.json'
-New-AzResourceGroupDeployment -Name $deploymentName `
-    -ResourceGroupName $ResourceGroup `
-    -TemplateUri $remoteUrl `
-    -TemplateParameterFile $localTemplate `
-    -Verbose
-
-    
+ 
 $deploymentName = "" + $deploySuffix
 $remoteUrl = ""
 $localTemplate = '.parameters.json'
