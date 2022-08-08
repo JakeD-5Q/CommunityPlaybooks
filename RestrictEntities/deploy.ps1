@@ -4,6 +4,7 @@ param(
     [Parameter(Mandatory = $true)]$Prefix
 )
 
+# check is RG exists, create one with the provided name if False
 Get-AzResourceGroup -Name $ResourceGroup -ErrorVariable notPresent -ErrorAction SilentlyContinue
 
 if ($notPresent) {
@@ -13,9 +14,10 @@ if ($notPresent) {
     
     New-AzResourceGroup -Name $ResourceGroup `
         -Location $Location `
-        -Verbose
+        # -Verbose
 }
 
+# Create unique deployment name
 $today = Get-Date -Format "MM-dd-yyyy"
 $suffix = Get-Random -Maximum 100
 $deploySuffix = $today + "_$suffix"
@@ -42,7 +44,7 @@ New-AzResourceGroupDeployment -Name $deploymentName `
     -Verbose
 
 $NewName = New-PbName($Name, $Prefix)
-Restrict-MDEAppExecution.permissions.ps1 -PlaybookName $NewName
+.\Restrict-MDEAppExecution.permissions.ps1 -PlaybookName $NewName
 
 
 $Name = "Restrict-MDEDomain"
@@ -56,7 +58,7 @@ New-AzResourceGroupDeployment -Name $deploymentName `
     -Verbose
 
 $NewName = New-PbName($Name, $Prefix)
-Restrict-MDEDomain.permissions.ps1 -PlaybookName $NewName
+.\Restrict-MDEDomain.permissions.ps1 -PlaybookName $NewName
 
 
 $Name = "Restrict-MDEFileHash"
@@ -70,7 +72,7 @@ New-AzResourceGroupDeployment -Name $deploymentName `
     -Verbose
 
 $NewName = New-PbName($Name, $Prefix)
-Restrict-MDEFileHash.permissions.ps1 -PlaybookName $NewName
+.\Restrict-MDEFileHash.permissions.ps1 -PlaybookName $NewName
 
 
 $Name = "Restrict-MDEIPAddress"
@@ -84,7 +86,7 @@ New-AzResourceGroupDeployment -Name $deploymentName `
     -Verbose
 
 $NewName = New-PbName($Name, $Prefix)
-Restrict-MDEIPAddress.permissions.ps1 `
+.\Restrict-MDEIPAddress.permissions.ps1 `
  -PlaybookName $NewName `
  -SubscriptionId $SubscriptionId `
  -ResourceGroup $ResourceGroup
@@ -101,6 +103,7 @@ New-AzResourceGroupDeployment -Name $deploymentName `
     -Verbose
 
 $NewName = New-PbName($Name, $Prefix)
-Restrict-MDEUrl.permissions.ps1 -PlaybookName $NewName
+.\Restrict-MDEUrl.permissions.ps1 `
+ -PlaybookName $NewName
 
 
