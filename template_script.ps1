@@ -1,9 +1,21 @@
+######################################################
+##################### DEPLOY.PS1 #####################
+######################################################
+# Playbooks this script deploys:
+# 
+# 
+# 
+
+# additional playbook parameters (parameters found in the local ARM template param file)
+# subscriptionId (Reset-password)
+# resourcegroup  (Reset-password)
+
+
 param(
-    [Parameter(Mandatory = $true)]$NamePrefix,
-    [Parameter(Mandatory = $true)]$PlaybookName,
-    [Parameter(Mandatory = $true)]$ResourceGroup,
-    [Parameter(Mandatory = $true)]$Location
+    [Parameter(Mandatory = $true)]$ResourceGroup
 )
+
+Connect-AzureAD
 
 # check resource group
 Get-AzResourceGroup -Name $ResourceGroup -ErrorVariable notPresent -ErrorAction SilentlyContinue
@@ -48,18 +60,44 @@ New-AzResourceGroupDeployment -Name $deploymentName `
     -TemplateParameterFile $localTemplate `
     -Verbose
 
-##########################################################
-# Grant-Permissions.ps1
-##########################################################
+######################################################
+############## Grant-Permissions.ps1 #################
+######################################################
+param(
+    [Parameter(Mandatory = $true)]$ResourceGroup,
+    [Parameter(Mandatory = $true)]$Prefix
+)
+
 function New-PbName() {
     param(
-        [Parameter(Mandatory = $true)]$PlaybookName,
-        [Parameter(Mandatory = $true)]$Prefix
-    )
+        [Parameter(Mandatory = $true)]$Prefix,
+        [Parameter(Mandatory = $true)]$PlaybookName
+        )
+        
+        $NewName = $Prefix + "." + $PlaybookName
+        return $NewName
+    }
+    
+Connect-AzureAD
 
-    $NewName = $Prefix + "$.$PlaybookName"
-    return $NewName
-}
+# Retrieve the Subscription ID for permission scripts
+$SubscriptionId = (Get-AzContext).Subscription.id
+Write-Host $SubscriptionId
 
-$NewName = New-PbName($Name, $Prefix)
-.\.permissions.ps1 -PlaybookName $NewName
+$Name = "PlaybookName"
+$NewName = New-PbName $Prefix $Name
+Write-Host $NewName
+
+$ID = (Get-AzResource -Name $NewName -ResourceType Microsoft.Logic/workflows).Identity.PrincipalId
+Write-Host $ID
+
+.\Permissions\$Name.ps1 -MIGuid $ID
+
+######################################################
+############# Permissions\Playbook.ps1 ###############
+######################################################
+param(
+    [Parameter(Mandatory = $true)]$MIGuid
+)
+
+
