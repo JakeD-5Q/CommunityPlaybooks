@@ -4,6 +4,8 @@ param(
     [Parameter(Mandatory = $true)]$Prefix
 )
 
+Connect-AzureAD
+
 # check is RG exists, create one with the provided name if False
 Get-AzResourceGroup -Name $ResourceGroup -ErrorVariable notPresent -ErrorAction SilentlyContinue
 

@@ -45,4 +45,21 @@ $localTemplate = '.parameters.json'
 New-AzResourceGroupDeployment -Name $deploymentName `
     -ResourceGroupName $ResourceGroup `
     -TemplateUri $remoteUrl `
-    -TemplateParameterFile $localTemplate
+    -TemplateParameterFile $localTemplate `
+    -Verbose
+
+##########################################################
+# Grant-Permissions.ps1
+##########################################################
+function New-PbName() {
+    param(
+        [Parameter(Mandatory = $true)]$PlaybookName,
+        [Parameter(Mandatory = $true)]$Prefix
+    )
+
+    $NewName = $Prefix + "$.$PlaybookName"
+    return $NewName
+}
+
+$NewName = New-PbName($Name, $Prefix)
+.\.permissions.ps1 -PlaybookName $NewName

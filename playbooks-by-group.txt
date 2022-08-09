@@ -1,13 +1,4 @@
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~*
-|   	    Enrich 			|
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~*
-Enrich-Sentinel-Incident-AlienVault-OTX	
-Get-AlertEntitiesEnrichment	
-Get-AlienVault_OTX	
-Get-MDEFileActivityWithin30Mins	
-Get-MDEProcessActivityWithin30Mins	
-
-*~~~~~~~~~~~~~~~~~~~~~~~~~~~*
 |	        Health          |
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~*
 Send-AnalyticalRulesHealthNotifications	
