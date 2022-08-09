@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "PlaybookName": {
-            "value": "Confirm-AADRiskyUser"
+            "value": "Dismiss-AADRiskyUser"
         },
         "UserName": {
             "value": "user@domain.com"

@@ -1,0 +1,1 @@
+# You will need to add the managed identity that is created by the Logic App to the Security Administrator role in Azure AD.
