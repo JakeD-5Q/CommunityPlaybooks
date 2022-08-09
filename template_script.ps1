@@ -100,4 +100,20 @@ param(
     [Parameter(Mandatory = $true)]$MIGuid
 )
 
+Connect-AzureAD -TenantId xxxxx-xxxx-xxxx-etc
+$app = Get-AzureADServicePrincipal -SearchString "display name of app"
+
+foreach ($AD_group_name in $list_of_names_to_map) {
+    $AADGroup = Get-AzureADGroup -SearchString $AD_group_name
+    $AppRole = $App.AppRoles | ? { $_.value -like $AADGroup.DisplayName }
+
+
+$NewAssignmentParams = @{
+    'id'          = $AppRole.Id;
+    'objectid'    = $AADGroup.ObjectId;
+    'PrincipalId' = $AADGroup.ObjectId;
+    'ResourceId'  = $App.ObjectId;
+}
+
+New-AzureADGroupAppRoleAssignment @NewAssignmentParams
 
