@@ -21,23 +21,36 @@ Connect-AzureAD
 
 # Retrieve the Subscription ID for permission scripts
 $SubscriptionId = (Get-AzContext).Subscription.id
-Write-Host $SubscriptionId
+
 
 $Name = "Restrict-MDEAppExecution"
 $NewName = New-PbName $Prefix $Name
-Write-Host $NewName
-
 $ID = (Get-AzResource -Name $NewName -ResourceType Microsoft.Logic/workflows).Identity.PrincipalId
-Write-Host $ID
+& .\Permissions\$Name.ps1 -MIGuid $ID
 
-.\Permissions\$Name.ps1 -MIGuid $ID
 
 $Name = "Restrict-MDEUrl"
 $NewName = New-PbName $Prefix $Name
-Write-Host $NewName
-
 $ID = (Get-AzResource -Name $NewName -ResourceType Microsoft.Logic/workflows).Identity.PrincipalId
-Write-Host $ID
+& .\Permissions\$Name.ps1 -MIGuid $ID
 
-# This will change with the requirements for the permissions script
-.\Permissions\$Name.ps1 -MIGuid $ID
+
+$Name = "Restrict-MDEDomain"
+$NewName = New-PbName $Prefix $Name
+$ID = (Get-AzResource -Name $NewName -ResourceType Microsoft.Logic/workflows).Identity.PrincipalId
+& .\Permissions\$Name.ps1 -MIGuid $ID
+
+
+$Name = "Restrict-MDEFileHash"	
+$NewName = New-PbName $Prefix $Name
+$ID = (Get-AzResource -Name $NewName -ResourceType Microsoft.Logic/workflows).Identity.PrincipalId
+& .\Permissions\$Name.ps1 -MIGuid $ID
+
+
+$Name = "Restrict-MDEIPAddress"	
+$NewName = New-PbName $Prefix $Name
+$ID = (Get-AzResource -Name $NewName -ResourceType Microsoft.Logic/workflows).Identity.PrincipalId
+& .\Permissions\$Name.ps1 -MIGuid $ID -SubscriptionId $SubscriptionId -ResourceGroup $ResourceGroup
+
+
+

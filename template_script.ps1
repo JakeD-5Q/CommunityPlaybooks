@@ -69,7 +69,7 @@ param(
 )
 
 function New-PbName() {
-    param(
+    param(s
         [Parameter(Mandatory = $true)]$Prefix,
         [Parameter(Mandatory = $true)]$PlaybookName
         )

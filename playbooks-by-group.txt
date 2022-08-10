@@ -40,10 +40,8 @@ Restrict-MDEUrl
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~*
 |		Risky User   	  	|
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~*
-Block-AADUser	
 Reset-AADUserPassword	
 Block-AADUserOrAdmin	
-Block-OnPremADUser	
 Confirm-AADRiskyUser
 Dismiss-AADRiskyUser
 Revoke-AADSignInSessions	
@@ -54,4 +52,4 @@ Revoke-AADSignInSessions
 *~~~~~~~~~~~~~~~~~~~~~~~~~~~*
 Watchlist-Add-IPToWatchList	
 Watchlist-Add-URLToWatchList	
-Watchlist-CloseIncidentKnownIPs	
+

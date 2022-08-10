@@ -1,13 +1,9 @@
 param(
-    [Parameter(Mandatory = $true)]$PlaybookName,
     [Parameter(Mandatory = $true)]$SubscriptionId,
-    [Parameter(Mandatory = $true)]$ResourceGroup
+    [Parameter(Mandatory = $true)]$ResourceGroup,
+    [Parameter(Mandatory = $true)]$MIGuid
 )
 
-# get the object id of the playbook
-$ID = (Get-AzResource -Name $PlaybookName -ResourceType Microsoft.Logic/workflows).Identity.PrincipalId
-
-$MIGuid = $ID
 $MI = Get-AzureADServicePrincipal -ObjectId $MIGuid
 
 $MDEAppId = "fc780465-2017-40d4-a0c5-307022471b92"
@@ -20,3 +16,4 @@ New-AzureAdServiceAppRoleAssignment -ObjectId $MI.ObjectId -PrincipalId $MI.Obje
     -ResourceId $MDEServicePrincipal.ObjectId -Id $AppRole.Id
 
 New-AzRoleAssignment -ObjectId $MIGuid -RoleDefinitionName $RoleName -Scope /subscriptions/$SubscriptionId/resourcegroups/$ResourceGroup
+
