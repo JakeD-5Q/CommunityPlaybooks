@@ -23,7 +23,8 @@ $today = Get-Date -Format "MM-dd-yyyy"
 $suffix = Get-Random -Maximum 100
 $deploySuffix = $today + "_$suffix"
 
-$Name = "Isolate-MDEMachine"
+$Name = "Send-IngestionCostAlert"	
+
 $deploymentName = $Name + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/$Name/alert-trigger/azuredeploy.json"
 $localTemplate = "Parameters\$Name.json"
@@ -33,19 +34,7 @@ New-AzResourceGroupDeployment -Name $deploymentName `
     -TemplateParameterFile $localTemplate `
     -Verbose
 
-
-$Name = "Unisolate-MDEMachine"
-$deploymentName = $Name + $deploySuffix
-$remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/$Name/alert-trigger/azuredeploy.json"
-$localTemplate = "Parameters\$Name.json"
-New-AzResourceGroupDeployment -Name $deploymentName `
-    -ResourceGroupName $ResourceGroup `
-    -TemplateUri $remoteUrl `
-    -TemplateParameterFile $localTemplate `
-    -Verbose
-
-
-$Name = "Remove-MDEAppExecution"
+$Name = "Send-IngestionCostAnomalyAlert"
 $deploymentName = $Name + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/$Name/alert-trigger/azuredeploy.json"
 $localTemplate = "Parameters\$Name.json"
