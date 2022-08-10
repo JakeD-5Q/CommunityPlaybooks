@@ -13,7 +13,9 @@ $PermissionName3 = "Directory.Read.All"
 $PermissionName4 = "Directory.ReadWrite.All"
 
 $GraphServicePrincipal = Get-AzureADServicePrincipal -Filter "appId eq '$GraphAppId'"
+
 $AppRole1 = $GraphServicePrincipal.AppRoles | Where-Object { $_.Value -eq $PermissionName1 -and $_.AllowedMemberTypes -contains "Application" }
+
 New-AzureAdServiceAppRoleAssignment -ObjectId $MI.ObjectId -PrincipalId $MI.ObjectId `
     -ResourceId $GraphServicePrincipal.ObjectId -Id $AppRole1.Id
 
