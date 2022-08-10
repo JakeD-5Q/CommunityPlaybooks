@@ -27,7 +27,7 @@ $deploySuffix = $today + "_$suffix"
 $Name = "Restrict-MDEUrl"
 $deploymentName = $Name + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/$Name/alert-trigger/azuredeploy.json"
-$localTemplate = "Parameters\$Name.json"
+$localTemplate = "Parameters/$Name.json"
 New-AzResourceGroupDeployment -Name $deploymentName `
     -ResourceGroupName $ResourceGroup `
     -TemplateUri $remoteUrl `
@@ -38,7 +38,7 @@ New-AzResourceGroupDeployment -Name $deploymentName `
 $Name = "Restrict-MDEAppExecution"
 $deploymentName = $Name + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/$Name/alert-trigger/azuredeploy.json"
-$localTemplate = "Parameters\$Name.json"
+$localTemplate = "Parameters/$Name.json"
 New-AzResourceGroupDeployment -Name $deploymentName `
     -ResourceGroupName $ResourceGroup `
     -TemplateUri $remoteUrl `
@@ -49,7 +49,7 @@ New-AzResourceGroupDeployment -Name $deploymentName `
 $Name = "Restrict-MDEDomain"
 $deploymentName = $Name + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/$Name/alert-trigger/azuredeploy.json"
-$localTemplate = "Parameters\$Name.json"
+$localTemplate = "Parameters/$Name.json"
 New-AzResourceGroupDeployment -Name $deploymentName `
     -ResourceGroupName $ResourceGroup `
     -TemplateUri $remoteUrl `
@@ -60,7 +60,7 @@ New-AzResourceGroupDeployment -Name $deploymentName `
 $Name = "Restrict-MDEFileHash"	
 $deploymentName = $Name + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/$Name/alert-trigger/azuredeploy.json"
-$localTemplate = "Parameters\$Name.json"
+$localTemplate = "Parameters/$Name.json"
 New-AzResourceGroupDeployment -Name $deploymentName `
     -ResourceGroupName $ResourceGroup `
     -TemplateUri $remoteUrl `
@@ -71,7 +71,7 @@ New-AzResourceGroupDeployment -Name $deploymentName `
 $Name = "Restrict-MDEIPAddress"	
 $deploymentName = $Name + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/$Name/alert-trigger/azuredeploy.json"
-$localTemplate = "Parameters\$Name.json"
+$localTemplate = "Parameters/$Name.json"
 New-AzResourceGroupDeployment -Name $deploymentName `
     -ResourceGroupName $ResourceGroup `
     -TemplateUri $remoteUrl `
