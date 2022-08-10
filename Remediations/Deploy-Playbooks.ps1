@@ -1,6 +1,5 @@
 param(
-    [Parameter(Mandatory = $true)]$ResourceGroup,
-    [Parameter(Mandatory = $true)]$Prefix
+    [Parameter(Mandatory = $true)]$ResourceGroup
 )
 
 Connect-AzureAD
@@ -26,7 +25,7 @@ $deploySuffix = $today + "_$suffix"
 $Name = "Isolate-MDEMachine"
 $deploymentName = $Name + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/$Name/alert-trigger/azuredeploy.json"
-$localTemplate = "Parameters\$Name.json"
+$localTemplate = "Parameters/$Name.json"
 New-AzResourceGroupDeployment -Name $deploymentName `
     -ResourceGroupName $ResourceGroup `
     -TemplateUri $remoteUrl `
@@ -37,7 +36,7 @@ New-AzResourceGroupDeployment -Name $deploymentName `
 $Name = "Unisolate-MDEMachine"
 $deploymentName = $Name + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/$Name/alert-trigger/azuredeploy.json"
-$localTemplate = "Parameters\$Name.json"
+$localTemplate = "Parameters/$Name.json"
 New-AzResourceGroupDeployment -Name $deploymentName `
     -ResourceGroupName $ResourceGroup `
     -TemplateUri $remoteUrl `
@@ -48,7 +47,7 @@ New-AzResourceGroupDeployment -Name $deploymentName `
 $Name = "Remove-MDEAppExecution"
 $deploymentName = $Name + $deploySuffix
 $remoteUrl = "https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Playbooks/$Name/alert-trigger/azuredeploy.json"
-$localTemplate = "Parameters\$Name.json"
+$localTemplate = "Parameters/$Name.json"
 New-AzResourceGroupDeployment -Name $deploymentName `
     -ResourceGroupName $ResourceGroup `
     -TemplateUri $remoteUrl `

@@ -1,7 +1,8 @@
 param(
-    [Parameter(Mandatory = $true)]$MIGuid
+    [Parameter(Mandatory = $true)]$MIGuid,
+    [Parameter(Mandatory = $true)]$SubscriptionId,
+    [Parameter(Mandatory = $true)]$ResourceGroup
 )
-
 
 $MI = Get-AzureADServicePrincipal -ObjectId $MIGuid
 
@@ -28,6 +29,6 @@ $AppRole4 = $GraphServicePrincipal.AppRoles | Where-Object { $_.Value -eq $Permi
 New-AzureAdServiceAppRoleAssignment -ObjectId $MI.ObjectId -PrincipalId $MI.ObjectId `
     -ResourceId $GraphServicePrincipal.ObjectId -Id $AppRole4.Id
 
-
-
-    # also assign: Microsoft Sentinel Responder
+$RoleName = "Microsoft Sentinel Responder"
+New-AzRoleAssignment -ObjectId $MIGuid -RoleDefinitionName $RoleName -Scope /subscriptions/$SubscriptionId/resourcegroups/$ResourceGroup
+    

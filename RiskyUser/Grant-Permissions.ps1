@@ -31,22 +31,22 @@ $ID = (Get-AzResource -Name $NewName -ResourceType Microsoft.Logic/workflows).Id
 $Name = "Reset-AADUserPassword"
 $NewName = New-PbName $Prefix $Name
 $ID = (Get-AzResource -Name $NewName -ResourceType Microsoft.Logic/workflows).Identity.PrincipalId
-& .\Permissions\$Name.ps1 -MIGuid $ID -SubscriptionId $SubscriptionId -ResourceGroup $
+& .\Permissions\$Name.ps1 -MIGuid $ID -SubscriptionId $SubscriptionId -ResourceGroup $ResourceGroup
 
 
 $Name = "Block-AADUserOrAdmin"	
 $NewName = New-PbName $Prefix $Name
 $ID = (Get-AzResource -Name $NewName -ResourceType Microsoft.Logic/workflows).Identity.PrincipalId
-& .\Permissions\$Name.ps1 -MIGuid $ID
+& .\Permissions\$Name.ps1 -MIGuid $ID -SubscriptionId $SubscriptionId -ResourceGroup $ResourceGroup
 
 
 $Name = "Confirm-AADRiskyUser"
 $NewName = New-PbName $Prefix $Name
 $ID = (Get-AzResource -Name $NewName -ResourceType Microsoft.Logic/workflows).Identity.PrincipalId
-& .\Permissions\$Name.ps1 -MIGuid $ID
+& .\Permissions\$Name.ps1 -MIGuid $ID -SubscriptionId $SubscriptionId -ResourceGroup $ResourceGroup
 
 
 $Name = "Dismiss-AADRiskyUser"
 $NewName = New-PbName $Prefix $Name
 $ID = (Get-AzResource -Name $NewName -ResourceType Microsoft.Logic/workflows).Identity.PrincipalId
-& .\Permissions\$Name.ps1 -MIGuid $ID
+& .\Permissions\$Name.ps1 -MIGuid $ID -SubscriptionId $SubscriptionId -ResourceGroup $ResourceGroup

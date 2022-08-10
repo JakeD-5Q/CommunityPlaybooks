@@ -5,6 +5,7 @@ param(
 )
 
 $MI = Get-AzureADServicePrincipal -ObjectId $MIGuid
+
 $GraphAppId = "00000003-0000-0000-c000-000000000000"
 $roleName = "Password Administrator"
 $SentinelRoleName = "Microsoft Sentinel Responder"
