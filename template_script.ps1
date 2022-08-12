@@ -30,17 +30,6 @@ if ($notPresent) {
         -Verbose
 }
 
-# build playbook name
-$DeployedName = $NamePrefix + ".$PlaybookName"
-
-# to get value from file and use it within the template
-# https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-powershell#deploy-template-spec
-
-
-# get the object id of the playbook
-$ID = (Get-AzResource -Name $DeployedName -ResourceType Microsoft.Logic/workflows).Identity.PrincipalId
-$MIGuid = $ID
-$MI = Get-AzureADServicePrincipal -ObjectId $MIGuid
 
 
 # Deploy all of these playbooks without downloading or cloning this repository

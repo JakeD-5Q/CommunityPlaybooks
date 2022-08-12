@@ -7,7 +7,6 @@ param(
 $MI = Get-AzureADServicePrincipal -ObjectId $MIGuid
 
 $roleName = "Security Admin"
-$SubscriptionId = "9c866f63-a24f-4d7b-abdd-4c67a572d713"
 
 $role = Get-AzureADDirectoryRole | Where-Object { $_.displayName -eq $roleName }
 
